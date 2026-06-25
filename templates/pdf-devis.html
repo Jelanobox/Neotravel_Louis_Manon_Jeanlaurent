@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+  pdf-devis.html — Template HTML généré en PDF par n8n
+  Variables (remplacées dans le nœud Code n8n avant conversion PDF) :
+    {{DEVIS_ID}}        {{CLIENT_NOM}}      {{CLIENT_EMAIL}}
+    {{TRAJET}}          {{DATE_DEPART}}     {{NB_PASSAGERS}}
+    {{ALLER_RETOUR}}    {{OPTION_GUIDE}}    {{OPTION_NUIT}}
+    {{PRIX_BASE}}       {{COEF_SAISON}}     {{COEF_ANTICIP}}
+    {{COEF_CAPA}}       {{BASE_AJUSTEE}}    {{SUPPLEMENTS}}
+    {{MARGE}}           {{PRIX_HT}}         {{TVA}}
+    {{PRIX_TTC}}        {{DATE_VALIDITE}}   {{DATE_EMISSION}}
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; font-size: 12px; color: #333; background: #fff; padding: 40px; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 3px solid #1B3A6B; }
+    .logo { font-size: 24px; font-weight: bold; color: #1B3A6B; }
+    .logo-sub { font-size: 10px; color: #888; margin-top: 4px; }
+    .devis-ref { text-align: right; }
+    .devis-ref .id { font-size: 18px; font-weight: bold; color: #1B3A6B; }
+    .devis-ref .date { font-size: 11px; color: #666; margin-top: 4px; }
+    .section-title { font-size: 11px; font-weight: bold; color: #2E75B6; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #D5E8F5; }
+    .client-box { background: #EBF3FB; border-left: 4px solid #2E75B6; padding: 12px 16px; border-radius: 0 4px 4px 0; }
+    .trajet-box { background: #F4F7FB; border: 1px solid #CCCCCC; border-radius: 4px; padding: 12px 16px; display: flex; gap: 24px; }
+    .trajet-item { flex: 1; }
+    .trajet-item label { font-size: 10px; color: #888; display: block; margin-bottom: 2px; }
+    .trajet-item value { font-weight: bold; color: #1B3A6B; }
+    table.detail { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    table.detail th { background: #1B3A6B; color: #fff; padding: 8px 10px; font-size: 11px; text-align: left; }
+    table.detail td { padding: 7px 10px; border-bottom: 1px solid #EEE; font-size: 11px; }
+    table.detail tr:nth-child(even) td { background: #F8F9FC; }
+    table.detail td.right { text-align: right; }
+    table.detail td.coef { color: #2E75B6; font-weight: bold; text-align: center; }
+    .total-box { margin-top: 16px; border: 2px solid #1B3A6B; border-radius: 6px; overflow: hidden; }
+    .total-row { display: flex; justify-content: space-between; padding: 8px 16px; border-bottom: 1px solid #EEE; font-size: 12px; }
+    .total-row.main { background: #1B3A6B; color: #fff; font-size: 15px; font-weight: bold; }
+    .total-row .label { color: inherit; }
+    .total-row .val { font-weight: bold; }
+    .conditions { margin-top: 24px; font-size: 10px; color: #888; line-height: 1.6; }
+    .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #EEE; display: flex; justify-content: space-between; font-size: 10px; color: #AAAAAA; }
+    .validity-badge { background: #E2F0E8; color: #1D7A4A; border: 1px solid #1D7A4A; padding: 6px 14px; border-radius: 4px; font-size: 11px; font-weight: bold; display: inline-block; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- En-tête -->
+  <div class="header">
+    <div>
+      <div class="logo">NeoTravel</div>
+      <div class="logo-sub">Réservation de cars · Devis instantané</div>
+      <div style="margin-top:8px;font-size:11px;color:#666;">
+        12 rue de la Logistique, 75010 Paris<br>
+        contact@neotravel.fr · 01 23 45 67 89
+      </div>
+    </div>
+    <div class="devis-ref">
+      <div class="id">DEVIS {{DEVIS_ID}}</div>
+      <div class="date">Émis le {{DATE_EMISSION}}</div>
+      <div class="validity-badge">Valable jusqu'au {{DATE_VALIDITE}}</div>
+    </div>
+  </div>
+
+  <!-- Client -->
+  <div class="section-title">Client</div>
+  <div class="client-box">
+    <strong>{{CLIENT_NOM}}</strong><br>
+    <span style="color:#555;">{{CLIENT_EMAIL}}</span>
+  </div>
+
+  <!-- Trajet -->
+  <div class="section-title">Détails du trajet</div>
+  <div class="trajet-box">
+    <div class="trajet-item"><label>Trajet</label><value>{{TRAJET}}</value></div>
+    <div class="trajet-item"><label>Date de départ</label><value>{{DATE_DEPART}}</value></div>
+    <div class="trajet-item"><label>Passagers</label><value>{{NB_PASSAGERS}} pers.</value></div>
+    <div class="trajet-item"><label>Sens</label><value>{{ALLER_RETOUR}}</value></div>
+    <div class="trajet-item"><label>Options</label><value>{{OPTION_GUIDE}} {{OPTION_NUIT}}</value></div>
+  </div>
+
+  <!-- Calcul détaillé -->
+  <div class="section-title">Détail du calcul</div>
+  <table class="detail">
+    <tr><th>Étape</th><th>Base</th><th>Coefficient</th><th class="right">Résultat</th></tr>
+    <tr><td>Prix de base (grille forfaitaire)</td><td>—</td><td class="coef">—</td><td class="right">{{PRIX_BASE}} €</td></tr>
+    <tr><td>Coefficient saisonnalité</td><td>{{PRIX_BASE}} €</td><td class="coef">× {{COEF_SAISON}}</td><td class="right">—</td></tr>
+    <tr><td>Coefficient anticipation</td><td>—</td><td class="coef">× {{COEF_ANTICIP}}</td><td class="right">—</td></tr>
+    <tr><td>Coefficient capacité</td><td>—</td><td class="coef">× {{COEF_CAPA}}</td><td class="right">—</td></tr>
+    <tr><td><strong>Base ajustée</strong></td><td>—</td><td class="coef">—</td><td class="right"><strong>{{BASE_AJUSTEE}} €</strong></td></tr>
+    <tr><td>Suppléments (options)</td><td>—</td><td class="coef">—</td><td class="right">{{SUPPLEMENTS}} €</td></tr>
+    <tr><td>Marge commerciale NeoTravel</td><td>—</td><td class="coef">× 1,15</td><td class="right">{{MARGE}} €</td></tr>
+  </table>
+
+  <!-- Totaux -->
+  <div class="total-box">
+    <div class="total-row"><span class="label">Prix HT</span><span class="val">{{PRIX_HT}} €</span></div>
+    <div class="total-row"><span class="label">TVA (10%)</span><span class="val">{{TVA}} €</span></div>
+    <div class="total-row main"><span class="label">TOTAL TTC</span><span class="val">{{PRIX_TTC}} €</span></div>
+  </div>
+
+  <!-- Conditions -->
+  <div class="conditions">
+    <strong>Conditions :</strong> Ce devis est valable 14 jours à compter de la date d'émission.
+    Le prix inclut le transport aller (et retour si mentionné), le carburant et les péages autoroutiers.
+    Frais non inclus : hébergement chauffeur si nuit requise (sauf option souscrite), stationnement, escorte.
+    Paiement : 30% à la confirmation, solde 5 jours avant le départ.
+  </div>
+
+  <div class="footer">
+    <span>NeoTravel SAS — SIRET 123 456 789 00000 — TVA FR00123456789</span>
+    <span>Devis généré automatiquement · Référence {{DEVIS_ID}}</span>
+  </div>
+
+</body>
+</html>

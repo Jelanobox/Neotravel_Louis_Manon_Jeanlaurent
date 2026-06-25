@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+  email-relance-standard.html — Relance J+3 ou J+7 (devis DD_NORMAL / DD_3MOISETPLUS)
+  Variables : {{CLIENT_NOM}}, {{TRAJET}}, {{DATE_DEPART}}, {{PRIX_TTC}}, {{DEVIS_ID}}, {{NB_JOURS}}
+-->
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Relance devis NeoTravel</title></head>
+<body style="margin:0;padding:0;background:#F4F7FB;font-family:Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F4F7FB;padding:32px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:8px;overflow:hidden;">
+
+        <tr>
+          <td style="background:#1B3A6B;padding:20px 40px;">
+            <h1 style="margin:0;color:#FFFFFF;font-size:20px;">NeoTravel · Toujours là pour votre trajet</h1>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:32px 40px;">
+            <p style="margin:0 0 16px;font-size:15px;color:#333;">Bonjour <strong>{{CLIENT_NOM}}</strong>,</p>
+            <p style="margin:0 0 16px;font-size:15px;color:#555;line-height:1.6;">
+              Il y a {{NB_JOURS}} jours, nous vous avons adressé un devis pour votre trajet
+              <strong>{{TRAJET}}</strong> prévu le <strong>{{DATE_DEPART}}</strong>.
+            </p>
+            <p style="margin:0 0 24px;font-size:15px;color:#555;line-height:1.6;">
+              Votre devis <strong>{{DEVIS_ID}}</strong> reste valable au tarif de <strong>{{PRIX_TTC}} € TTC</strong>.
+              Avez-vous eu l'occasion d'en prendre connaissance ? Si vous avez des questions, nous sommes disponibles.
+            </p>
+            <a href="mailto:contact@neotravel.fr?subject=Retour devis {{DEVIS_ID}}"
+               style="display:inline-block;background:#2E75B6;color:#FFFFFF;padding:13px 32px;border-radius:5px;text-decoration:none;font-weight:bold;font-size:14px;">
+              Répondre à ce devis
+            </a>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="background:#EBF3FB;padding:16px 40px;">
+            <p style="margin:0;font-size:12px;color:#2E75B6;text-align:center;">
+              NeoTravel · contact@neotravel.fr · 01 23 45 67 89<br>
+              <em style="color:#AAA;">Pour ne plus recevoir de relances sur ce devis, répondez "Sans suite".</em>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

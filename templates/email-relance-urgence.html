@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+  email-relance-urgence.html — Relance J+2 pour devis urgents (DD_PRIORITAIRE / DD_URGENT)
+  Variables : {{CLIENT_NOM}}, {{TRAJET}}, {{DATE_DEPART}}, {{PRIX_TTC}}, {{DEVIS_ID}}
+-->
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Relance devis NeoTravel</title></head>
+<body style="margin:0;padding:0;background:#F4F7FB;font-family:Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F4F7FB;padding:32px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:8px;overflow:hidden;">
+
+        <tr>
+          <td style="background:#C55A11;padding:20px 40px;">
+            <h1 style="margin:0;color:#FFFFFF;font-size:20px;">NeoTravel — Votre devis expire bientôt</h1>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:32px 40px;">
+            <p style="margin:0 0 16px;font-size:15px;color:#333;">Bonjour <strong>{{CLIENT_NOM}}</strong>,</p>
+            <p style="margin:0 0 16px;font-size:15px;color:#555;line-height:1.6;">
+              Votre trajet <strong>{{TRAJET}}</strong> est prévu le <strong>{{DATE_DEPART}}</strong>.
+              Votre devis <strong>{{DEVIS_ID}}</strong> est toujours disponible au tarif de <strong>{{PRIX_TTC}} € TTC</strong>.
+            </p>
+            <p style="margin:0 0 24px;font-size:15px;color:#C55A11;font-weight:bold;">
+              ⚠️ En raison de la proximité de votre date de départ, la disponibilité des véhicules ne peut être garantie au-delà de 24h.
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="padding:0 8px 0 0;">
+                  <a href="mailto:contact@neotravel.fr?subject=Acceptation devis {{DEVIS_ID}}"
+                     style="display:block;background:#1D7A4A;color:#FFF;padding:12px;border-radius:5px;text-decoration:none;font-weight:bold;font-size:14px;text-align:center;">
+                    ✓ Confirmer maintenant
+                  </a>
+                </td>
+                <td style="padding:0 0 0 8px;">
+                  <a href="tel:0123456789"
+                     style="display:block;background:#1B3A6B;color:#FFF;padding:12px;border-radius:5px;text-decoration:none;font-weight:bold;font-size:14px;text-align:center;">
+                    📞 Nous appeler
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="background:#FBE9DC;padding:16px 40px;">
+            <p style="margin:0;font-size:12px;color:#C55A11;text-align:center;">
+              NeoTravel · contact@neotravel.fr · 01 23 45 67 89
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
