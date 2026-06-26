@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Neotravel_Louis_Manon_Jeanlaurent
-
-=======
 # NeoTravel — Site de réservation de cars avec devis automatisé
 
 Projet Epitech MBA1 · Groupe : Manon, Jean-Laurent, Louis · Soutenance : 1er juillet 2026
@@ -138,4 +134,3 @@ Prix TTC = Prix HT × 1.10 (TVA 10%)
 | Manon | Product Owner, coordination, docs |
 | Jean-Laurent | Backend n8n, moteur de prix |
 | Louis | Frontend Next.js, intégration |
->>>>>>> b57638b (Initial commit - frontend Neotravel)
