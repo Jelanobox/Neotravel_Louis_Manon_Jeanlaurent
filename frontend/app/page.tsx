@@ -1,7 +1,7 @@
 // app/page.tsx — Page principale NéoTravel Bus
-import Hero from '@/components/Hero';
-import N8nChatWidget from '@/components/N8nChatWidget';
-import Footer from '@/components/Footer';
+import Hero from '@/components/hero';
+import ChatWidget from '@/components/chatWidget';
+import Footer from '@/components/footer';
 import TrustBanner from '@/components/TrustBanner';
 
 export default function HomePage() {
@@ -59,8 +59,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Section devis */}
-      <N8nChatWidget />
+      <ChatWidget />
 
       {/* Partenaires transporteurs */}
       <section id="partenaires" style={{ padding: '72px 0', background: 'var(--gray-50)', borderTop: '1px solid var(--gray-200)' }}>
@@ -88,7 +87,6 @@ export default function HomePage() {
       </section>
 
       <Footer />
-      <N8nChatWidget />
     </main>
   );
 }

@@ -1,5 +1,4 @@
-// components/ChatWidget.tsx — Widget chat connecté au workflow n8n
-// Ce composant intègre le chat n8n via iframe ou API webhook
+// components/chatWidget.tsx — Widget de chat centré avec style NéoTravel
 'use client';
 import { useState, useRef, useEffect } from 'react';
 
@@ -17,7 +16,7 @@ export default function ChatWidget() {
     {
       id: '0',
       role: 'assistant',
-      content: 'Bonjour ! Je suis l\'assistant NeoTravel 🚌\n\nPour vous établir un devis, j\'ai besoin de quelques informations :\n\n1. Votre **ville de départ** et **destination** ?\n2. La **date** de votre voyage ?\n3. Le **nombre de passagers** ?',
+      content: 'Bonjour ! Je suis l’assistant NéoTravel 🚌\n\nDites-moi votre trajet, la date et le nombre de passagers pour recevoir un devis rapide.',
       timestamp: new Date(),
     }
   ]);
@@ -60,7 +59,7 @@ export default function ChatWidget() {
       const assistantMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: data.response || data.output || 'Je n\'ai pas compris, pouvez-vous reformuler ?',
+        content: data.response || data.output || 'Je n’ai pas compris, pouvez-vous reformuler ?',
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, assistantMsg]);
@@ -77,46 +76,50 @@ export default function ChatWidget() {
   }
 
   return (
-    <section id="devis" style={{ padding: '64px 0', background: '#EBF3FB' }}>
-      <div className="container" style={{ maxWidth: 700 }}>
-        <h2 style={{ textAlign: 'center', color: '#1B3A6B', marginBottom: 8, fontSize: 22 }}>
-          Obtenir mon devis
-        </h2>
-        <p style={{ textAlign: 'center', color: '#666', marginBottom: 32, fontSize: 14 }}>
-          Notre conseiller en ligne recueille vos informations et vous génère un devis en temps réel.
-        </p>
+    <section id="devis" style={{ padding: '72px 0', background: 'var(--teal)', color: 'var(--white)' }}>
+      <div className="container" style={{ maxWidth: 1100 }}>
+        <div style={{ textAlign: 'center', marginBottom: 28, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="badge" style={{ marginBottom: 16, color: 'var(--teal)', background: 'rgba(255,210,48,0.2)', border: '1px solid rgba(255,210,48,0.35)' }}>
+            ✦ Assistant instantané
+          </div>
+          <h2 style={{ fontSize: 34, fontWeight: 900, lineHeight: 1.2, marginBottom: 10 }}>
+            Demandez votre devis en quelques mots
+          </h2>
+          <p style={{ fontSize: 16, maxWidth: 660, margin: '0 auto', opacity: 0.85, lineHeight: 1.7 }}>
+            Notre conseiller virtuel vous accompagne pas à pas et vous aide à obtenir un devis fiable en quelques secondes.
+          </p>
+        </div>
 
-        {/* Chat window */}
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
-          boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+          background: 'rgba(255,255,255,0.08)',
+          borderRadius: 24,
+          border: '1px solid rgba(255,210,48,0.24)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
           overflow: 'hidden',
-          border: '1px solid #e0e8f0',
+          backdropFilter: 'blur(10px)',
         }}>
-          {/* Header */}
-          <div style={{ background: '#1B3A6B', color: '#fff', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 10, height: 10, background: '#4CAF50', borderRadius: '50%' }} />
-            <span style={{ fontWeight: 'bold', fontSize: 14 }}>Agent NeoTravel</span>
-            <span style={{ marginLeft: 'auto', fontSize: 12, opacity: 0.7 }}>En ligne</span>
+          <div style={{ background: 'rgba(255,255,255,0.1)', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+            <div style={{ width: 10, height: 10, background: '#4ade80', borderRadius: '50%' }} />
+            <span style={{ fontWeight: 700 }}>Conseiller NéoTravel</span>
+            <span style={{ fontSize: 12, opacity: 0.7 }}>• Réponse immédiate</span>
           </div>
 
-          {/* Messages */}
-          <div style={{ height: 380, overflowY: 'auto', padding: '20px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ height: 390, overflowY: 'auto', padding: '24px 24px 12px', display: 'flex', flexDirection: 'column', gap: 14 }}>
             {messages.map(msg => (
               <div key={msg.id} style={{
                 display: 'flex',
                 justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
               }}>
                 <div style={{
-                  maxWidth: '78%',
-                  padding: '10px 16px',
+                  maxWidth: '82%',
+                  padding: '12px 16px',
                   borderRadius: msg.role === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-                  background: msg.role === 'user' ? '#2E75B6' : '#F4F7FB',
-                  color: msg.role === 'user' ? '#fff' : '#333',
+                  background: msg.role === 'user' ? 'var(--yellow)' : 'rgba(255,255,255,0.12)',
+                  color: msg.role === 'user' ? 'var(--teal)' : 'var(--white)',
                   fontSize: 14,
                   lineHeight: 1.6,
                   whiteSpace: 'pre-wrap',
+                  fontWeight: msg.role === 'user' ? 700 : 400,
                 }}>
                   {msg.content}
                 </div>
@@ -124,7 +127,7 @@ export default function ChatWidget() {
             ))}
             {loading && (
               <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <div style={{ padding: '10px 16px', borderRadius: '16px 16px 16px 4px', background: '#F4F7FB', fontSize: 14, color: '#888' }}>
+                <div style={{ padding: '10px 16px', borderRadius: '16px 16px 16px 4px', background: 'rgba(255,255,255,0.12)', fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>
                   ⌛ En cours de traitement...
                 </div>
               </div>
@@ -132,8 +135,7 @@ export default function ChatWidget() {
             <div ref={bottomRef} />
           </div>
 
-          {/* Input */}
-          <div style={{ padding: '12px 16px', borderTop: '1px solid #e8eef4', display: 'flex', gap: 10 }}>
+          <div style={{ padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
             <input
               value={input}
               onChange={e => setInput(e.target.value)}
@@ -141,29 +143,27 @@ export default function ChatWidget() {
               placeholder="Décrivez votre trajet..."
               disabled={loading}
               style={{
-                flex: 1,
-                padding: '10px 16px',
-                borderRadius: 8,
-                border: '1px solid #d0dcea',
+                width: '100%',
+                maxWidth: 720,
+                padding: '12px 16px',
+                borderRadius: 999,
+                border: '1px solid rgba(255,255,255,0.18)',
                 fontSize: 14,
                 outline: 'none',
-                background: loading ? '#f8f8f8' : '#fff',
+                background: loading ? 'rgba(248,250,252,0.8)' : 'rgba(255,255,255,0.94)',
+                color: 'var(--teal)',
               }}
             />
             <button
               onClick={sendMessage}
               disabled={loading || !input.trim()}
               className="btn-primary"
-              style={{ padding: '10px 20px', fontSize: 14, opacity: loading || !input.trim() ? 0.5 : 1 }}
+              style={{ minWidth: 180, justifyContent: 'center', padding: '12px 24px', opacity: loading || !input.trim() ? 0.6 : 1 }}
             >
               Envoyer
             </button>
           </div>
         </div>
-
-        <p style={{ textAlign: 'center', color: '#999', marginTop: 12, fontSize: 12 }}>
-          🔒 Vos données sont transmises de manière sécurisée. Devis envoyé par email sous 2 minutes.
-        </p>
       </div>
     </section>
   );
