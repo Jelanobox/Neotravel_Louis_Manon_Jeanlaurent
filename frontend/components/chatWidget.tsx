@@ -9,8 +9,7 @@ interface Message {
   timestamp: Date;
 }
 
-//const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL || 'https://manon59118.app.n8n.cloud/webhook/255dd347-8ed8-4646-bf10-72116af566e0/chat';
-const N8N_WEBHOOK_URL = "https://manon59118.app.n8n.cloud/webhook/neotravel-chat";
+const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'https://your-n8n-instance.com/webhook/neotravel-chat';
 
 export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
@@ -49,32 +48,22 @@ export default function ChatWidget() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          sessionId,
           message: userMsg.content,
-          sessionId: sessionId,
+          timestamp: userMsg.timestamp.toISOString(),
         }),
       });
 
-      if (!res.ok) {
-        throw new Error(`Erreur HTTP ${res.status}`);
-      }
-
-      const contentType = res.headers.get('content-type') || '';
-      const data = contentType.includes('application/json') ? await res.json() : await res.text();
-      console.log('Voici ce que n8n m\'envoie :', data);
-
-      const messageTexte = typeof data === 'string'
-        ? data
-        : ( data.reply );
+      const data = await res.json();
 
       const assistantMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: messageTexte,
+        content: data.response || data.output || 'Je n’ai pas compris, pouvez-vous reformuler ?',
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, assistantMsg]);
-    } catch (error) {
-      console.error('Erreur réseau :', error);
+    } catch {
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
