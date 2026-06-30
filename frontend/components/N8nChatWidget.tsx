@@ -4,7 +4,7 @@
 'use client';
 import { useEffect } from 'react';
 
-const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL || '';
+const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL || 'https://manon59118.app.n8n.cloud/webhook-test/neotravel-chat';
 
 export default function N8nChatWidget() {
   useEffect(() => {
